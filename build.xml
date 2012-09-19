@@ -39,6 +39,7 @@
     <zip destfile="${dist}/${ant.project.name}.zip">
       <fileset dir=".">
 	<include name="src/**" />
+	<exclude name="src/com/hipmob/android/testing/HipmobView.java" />
 	<include name="libs/**" />
 	<include name="assets/**" />
 	<include name="res/**" />

@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         
-        <activity android:name="com.hipmob.android.HipmobCore" android:label="@string/app_name" />
+        <activity android:name=".HipmobView" android:label="@string/app_name" />
         <activity android:name=".HipmobTestPreferences" />
     </application>
     

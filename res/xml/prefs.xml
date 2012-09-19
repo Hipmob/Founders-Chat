@@ -19,6 +19,13 @@
             android:title="@string/label_pref_email" >
         </EditTextPreference>
     </PreferenceCategory>
+    <PreferenceCategory android:title="@string/label_pref_about_now" >
+        <EditTextPreference
+            android:key="@string/pref_context"
+            android:summary="@string/label_pref_context_summary"
+            android:title="@string/label_pref_context" >
+        </EditTextPreference>
+    </PreferenceCategory>
     <PreferenceCategory android:title="@string/label_pref_about" >
         <Preference
             android:key="@string/pref_version"

@@ -21,4 +21,9 @@
     <string name="error_invalid_email">Please enter a valid email address.</string>
     <string name="message_email_updated">Your email address has been updated: the changes will take effect the next time you start the app.</string>
     <string name="message_name_updated">Your name address has been updated: the changes will take effect the next time you start the app.</string>
+    <string name="message_context_updated">Your context has been updated.</string>
+    <string name="label_pref_about_now">Right Now</string>
+    <string name="pref_context">pref_context</string>
+    <string name="label_pref_context">What you are up to</string>
+    <string name="label_pref_context_summary">What you are doing right now.</string>
 </resources>

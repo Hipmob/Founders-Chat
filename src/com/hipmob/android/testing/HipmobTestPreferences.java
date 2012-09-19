@@ -23,7 +23,7 @@ import com.hipmob.android.HipmobRemoteConnection;
 public class HipmobTestPreferences extends PreferenceActivity implements OnPreferenceChangeListener
 {
 	private SharedPreferences prefs;
-	private Preference name, deviceName, email, server;
+	private Preference name, deviceName, email, server, context;
 	private boolean changed;
 
 	public static final Pattern EMAIL_ADDRESS
@@ -92,6 +92,13 @@ public class HipmobTestPreferences extends PreferenceActivity implements OnPrefe
 			if(value != null) email.setSummary(value);
 			email.setOnPreferenceChangeListener(this);
 		}
+		
+		context = (Preference) findPreference(getString(R.string.pref_context));
+		if(context != null){
+			value = prefs.getString(getString(R.string.pref_context), null);
+			if(value != null) context.setSummary(value);
+			context.setOnPreferenceChangeListener(this);
+		}
 	}
 	
 	void openOnline()
@@ -129,7 +136,15 @@ public class HipmobTestPreferences extends PreferenceActivity implements OnPrefe
 			}else{
 				Toast.makeText(this, getString(R.string.error_invalid_email), Toast.LENGTH_LONG).show();
 			}
-			// TODO: update the user's name
+		}else if(preference == context){
+			String value = newValue.toString().trim();
+			preference.setSummary(value);
+			savePreference(preference, value);
+			
+			Toast.makeText(this, getString(R.string.message_context_updated), Toast.LENGTH_LONG).show();
+			
+			// update the user's name in the chat
+			HipmobRemoteConnection.updateContext(this, value);
 		}
 		return false;
 	}

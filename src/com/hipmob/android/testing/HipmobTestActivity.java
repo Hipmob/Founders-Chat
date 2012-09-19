@@ -35,6 +35,7 @@ public class HipmobTestActivity extends TabActivity
 	 * TODO: replace this key with your own to connect with your Hipmob account. The default key connects with the Hipmob founders.
 	 */
 	public static final String HIPMOB_KEY = "7152ce24a16d42eb8d30b5fe4c01f911";
+	//public static final String HIPMOB_KEY = "488b7ecc3a764176b50717278c6a9ea0";
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -48,7 +49,7 @@ public class HipmobTestActivity extends TabActivity
 		setContentView(R.layout.main);
 		
 		// create an intent
-		Intent i = new Intent(this, HipmobCore.class);
+		Intent i = new Intent(this, HipmobView.class);
 		
 		// REQUIRED: set the appid to the key you're provided
 		i.putExtra(HipmobCore.KEY_APPID, HIPMOB_KEY);
@@ -63,18 +64,21 @@ public class HipmobTestActivity extends TabActivity
 		}
 		
 		// put the user's email here (will show up in the chat status)
-		if(prefs.contains(getString(R.string.pref_name))){
+		if(prefs.contains(getString(R.string.pref_email))){
 			i.putExtra(HipmobCore.KEY_EMAIL, prefs.getString(getString(R.string.pref_email), "jack@theauthority.com"));
+		}
+		
+		// put context information about the user (such as the activity that 
+		// launched the chat window) here (will show up in the chat status)
+		if(prefs.contains(getString(R.string.pref_context))){
+			i.putExtra(HipmobCore.KEY_CONTEXT, prefs.getString(getString(R.string.pref_context), ""));
 		}
 		
 		// you can set a location string here or geolocation co-ordinates (location string will show up in the chat status)
 		//i.putExtra(HipmobCore.KEY_LOCATION, "Mountain View, CA");
 		//i.putExtra(HipmobCore.KEY_LATITUDE, 37.423105);
 		//i.putExtra(HipmobCore.KEY_LONGITUDE, -122.082399);
-		
-		// you can add extra context, such as the place where the user came from (will show up in the chat status) 
-		//i.putExtra(HipmobCore.KEY_CONTEXT, "Reaching out from the test app!");
-		
+				
 		// you can set the message that displays if a user connects and no admins are available
 		//i.putExtra(HipmobCore.KEY_AWAY_NOTICE, "No one is home right now. Send us an email!");
 		
