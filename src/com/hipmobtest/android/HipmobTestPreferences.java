@@ -1,4 +1,4 @@
-package com.hipmob.android.testing;
+package com.hipmobtest.android;
 
 import java.util.regex.Pattern;
 
@@ -114,7 +114,6 @@ public class HipmobTestPreferences extends PreferenceActivity implements OnPrefe
         setTitle(getString(R.string.label_preferences_title));
 	}
 	
-	@Override
 	public boolean onPreferenceChange(Preference preference, Object newValue)
 	{
 		if(preference == name){

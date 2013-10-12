@@ -1,4 +1,4 @@
-package com.hipmob.android.testing;
+package com.hipmobtest.android;
 
 import com.hipmob.android.HipmobCore;
 import com.hipmob.android.HipmobPendingMessageListener;
@@ -35,7 +35,6 @@ public class HipmobTestActivity extends TabActivity
 	 * TODO: replace this key with your own to connect with your Hipmob account. The default key connects with the Hipmob founders.
 	 */
 	public static final String HIPMOB_KEY = "7152ce24a16d42eb8d30b5fe4c01f911";
-	//public static final String HIPMOB_KEY = "488b7ecc3a764176b50717278c6a9ea0";
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -49,13 +48,13 @@ public class HipmobTestActivity extends TabActivity
 		setContentView(R.layout.main);
 		
 		// create an intent
-		Intent i = new Intent(this, HipmobView.class);
+		Intent i = new Intent(this, com.hipmob.android.HipmobCore.class);
 		
 		// REQUIRED: set the appid to the key you're provided
 		i.putExtra(HipmobCore.KEY_APPID, HIPMOB_KEY);
 		
 		// provide a device identifier here (for use with API calls and for peer-to-peer connections)
-		i.putExtra(HipmobCore.KEY_DEVICEID, getDeviceID());
+		i.putExtra(HipmobCore.KEY_USERID, getDeviceID());
 		
 		// 	set the user's name here (will show up in the chat status)
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getBaseContext());
@@ -125,8 +124,7 @@ public class HipmobTestActivity extends TabActivity
 	{
 		HipmobRemoteConnection.checkPendingMessages(this, HIPMOB_KEY, 
 				getDeviceID(),  
-				new HipmobPendingMessageListener(){
-			@Override
+				new HipmobPendingMessageListener(){			
 			public void pendingMessageCount(int count) {
 				final int cnt = count;
 				getTabHost().post(new Runnable(){
@@ -136,7 +134,6 @@ public class HipmobTestActivity extends TabActivity
 				});
 			}
 
-			@Override
 			public void pendingMessageLookupFailed() {
 				getTabHost().post(new Runnable(){
 					public void run(){
