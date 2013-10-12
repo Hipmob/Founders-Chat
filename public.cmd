@@ -1,0 +1,1 @@
+git archive --format=tar master | cd ..\android-public && tar xf -
