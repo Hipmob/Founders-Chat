@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hipmob.android.testing"
+    package="com.hipmobtest.android"
     android:versionCode="1"
     android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <uses-sdk android:minSdkVersion="5" />
 
@@ -10,7 +14,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
-            android:name=".HipmobTestActivity"
+            android:name="com.hipmobtest.android.HipmobTestActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.hipmob.android.HipmobCore" android:label="@string/app_name" />
+        <activity android:name="com.hipmobtest.android.HipmobTestPreferences" />
     </application>
-    
-    <uses-permission android:name="android.permission.INTERNET"/>
+
 </manifest>

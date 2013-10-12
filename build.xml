@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<project name="android-hipmob-testing" basedir="." default="package">
+  <path id="build.classpath">    
+    <fileset dir="./libs">
+      <include name="*.jar" />
+    </fileset>        
+    <fileset dir="C:\projects\Android\android-sdk-windows-1.5_r1\platforms\android-2.1">
+      <include name="android.jar" />
+    </fileset>
+  </path>
+  
+  <target name="init">
+    <property name="build" value="build" />
+    <property name="dist" value="dist" />
+    <property name="debug" value="true" />
+    <property name="src" value="src" />
+    <property environment="env" />
+  </target>
+
+  <target name="clean" depends="init">
+  <delete>
+    <fileset dir="${src}" casesensitive="no" defaultexcludes="no">
+      <include name="**/*~" />
+      <include name="**/*.class" />
+      <exclude name="**/CVS" />
+      <exclude name="**/CVS/**" />
+      <exclude name="**/.cvsignore" />
+    </fileset>
+    <fileset dir="${build}" includes="**/*.class" />
+    <fileset dir="${dist}" includes="${ant.project.name}.jar" />
+    <fileset dir="." casesensitive="no" defaultexcludes="no">
+      <include name="**/*~" />
+    </fileset>
+  </delete>
+  </target>
+
+  <target name="package" depends="init">
+    <mkdir dir="${dist}" />  
+    <zip destfile="${dist}/${ant.project.name}.zip">
+      <fileset dir=".">
+	<include name="src/**" />
+	<exclude name="src/com/hipmob/android/testing/HipmobView.java" />
+	<include name="libs/**" />
+	<include name="assets/**" />
+	<include name="res/**" />
+	<include name="AndroidManifest.xml" />
+	<include name=".classpath" />
+	<include name=".project" />
+	<include name="proguard-project.txt" />
+	<include name="project.properties" />
+      </fileset>
+    </zip>
+  </target>
+  
+  <target name="publish" depends="package">
+    <exec dir="../android/" executable="cmd" outputproperty="gitbranch">
+      <arg line='/C @for /f "tokens=3 usebackq delims=/" %i in (`git symbolic-ref -q HEAD`) do @echo %i' />
+    </exec>
+    <copy file="${dist}/${ant.project.name}.zip" overwrite="true" tofile="./${ant.project.name}-${gitbranch}.zip" />
+    <exec executable="s3">
+      <arg line="put hipmob ${ant.project.name}-${gitbranch}.zip /nogui /acl:public-read /yes /key:${env.AWS_ACCESS_KEY_ID} /secret:${env.AWS_SECRET_KEY}" />
+    </exec>
+    <delete file="./${ant.project.name}-${gitbranch}.zip" />
+  </target>
+</project>
